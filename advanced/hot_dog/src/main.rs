@@ -2,7 +2,9 @@ use dioxus::prelude::*;
 
 #[component]
 fn AppBasic() -> Element {
+    static CSS: Asset = asset!("/assets/main.css");
     rsx! {
+    document::Stylesheet { href: CSS }
     div { id: "title",
                 h1 { "HotDog! 🌭" }
             }
@@ -47,8 +49,42 @@ fn DogApp() -> Element {
     }
 }
 
+#[component]
+fn DogAppIntermediate() -> Element {
+    static CSS: Asset = asset!("/assets/main.css");
+    rsx! {
+        document::Stylesheet { href: CSS }
+        Title { }
+        DogView { }
+    }
+}
+#[component]
+fn Title() -> Element {
+    rsx! {
+        div {
+            id: "title",
+            h1 {"HotDog! 🌭"}
+        }
+    }
+}
+#[component]
+fn DogView() -> Element {
+    rsx! {
+        div {
+            id: "dogview",
+            img { src: "https://images.dog.ceo/breeds/pitbull/dog-3981540_1280.jpg" }
+        }
+        div {
+            id: "buttons",
+            button { id: "skip", "skip" }
+            button { id: "save", "save!" }
+        }
+    }
+}
+
 fn main() {
     // launch(DogApp);
     // launch(AppBasic);
     // launch(DogAppBasic);
+    launch(DogAppIntermediate);
 }
